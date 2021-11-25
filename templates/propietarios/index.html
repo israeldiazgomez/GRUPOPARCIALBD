@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+<h2> Listado de Propietarios</h2>
+<h1 class="pull-right">
+  <a href="{% url 'propietarios:propietarioCreate' %}" class="btn btn-primary pull-right" style="margin-top: -10px; margin-bottom: 5px">Agregar</a>
+</h1>
+
+<table class="table  table-striped">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Codigo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if propietarios %}
+        {% for propietario in propietarios %}
+           <tr>
+      
+              <td>{{ propietario.id}}</td>
+              <td>{{ propietario.nombre}}</td>
+              <td>{{ propietario.apellido}}</td>
+              <td>{{ propietario.fecha}}</td>
+              <td>{{ propietario.codigo}}</td>
+             <td>
+              <a class="btn btn-warning" href="{% url 'propietarios:propietarioEdit' propietario.id %}">  
+               
+                <i class="fas fa-pen-square"></i>
+                </a>
+               <a class="btn btn-danger" href="{% url 'propietarios:propietarioDelete' propietario.id %}">
+                
+                <i class="fas fa-trash-alt"></i>
+        
+
+               </a>
+                
+             </td>
+               
+              
+           </tr>
+           {% endfor %}
+           {% else %}  
+             <h3> Sin registros</h3>
+         {% endif %}
+         
+       </tbody>
+     </table>
+  {% endblock %}
